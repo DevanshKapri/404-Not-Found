@@ -11,6 +11,7 @@ import { Theme } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '../../components/Drawer';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme: Theme) => (
@@ -80,7 +81,12 @@ const useStyles = makeStyles((theme: Theme) => (
       },
       color: 'white',
       padding: '20px',
-    }
+    },
+    link: {
+      cursor: 'pointer',
+      color: 'white',
+      fontSize: '40px',
+    },
   })
 ))
 
@@ -98,6 +104,7 @@ const useStyles = makeStyles((theme: Theme) => (
 //   },
 // }))(Button);
 function Landing() {
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState<boolean>(false)
   const classes = useStyles()
   console.log(open);
@@ -108,9 +115,9 @@ function Landing() {
     <>
       <Grid className={classes.root}>
         <Grid container alignItems="center" className={classes.Navbar}>
-          <Typography variant='h5' className={classes.logo}>
+          <Link to='/' className={classes.link}>
             CryptoPredict
-          </Typography>
+          </Link>
           <List className={classes.navLink}>
             <ListItem>
               <ListItemButton>
@@ -132,7 +139,7 @@ function Landing() {
             <Box className={classes.btnMain}>
               <Button
                 variant='contained'
-                // onClick={() => router.push('/login')}
+                onClick={() => navigate('/login')}
                 // className={classes.menuBtn}
                 sx={{
                   backgroundColor: '#FF0090', '&:hover': {
@@ -146,7 +153,7 @@ function Landing() {
             <Box className={classes.btnMain}>
               <Button
                 variant='contained'
-                // onClick={() => router.push('/login')}
+                onClick={() => navigate('/signup')}
                 // className={classes.menuBtn}
                 sx={{
                   backgroundColor: '#FF0090', '&:hover': {
