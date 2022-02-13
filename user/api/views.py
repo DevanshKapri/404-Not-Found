@@ -15,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 @api_view(['GET', ])
-@permission_classes((IsAuthenticated),)
+@permission_classes((IsAuthenticated,)) 
 def get_uuid(request):
     user = request.user
     try:
@@ -29,7 +29,7 @@ def get_uuid(request):
 
 
 @api_view(['POST', ])
-@permission_classes((IsAuthenticated),)
+@permission_classes((IsAuthenticated,)) 
 def add_uuid(request):
     user = request.user
     if request.method == "POST":
@@ -43,7 +43,7 @@ def add_uuid(request):
 
 
 @api_view(['POST', ])
-@permission_classes((IsAuthenticated),)
+@permission_classes((IsAuthenticated,)) 
 def remove_uuid(request):
     user = request.user
     try:
