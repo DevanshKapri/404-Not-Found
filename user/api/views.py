@@ -19,14 +19,17 @@ class UserViewSet(viewsets.ModelViewSet):
 @permission_classes((IsAuthenticated,))
 def get_uuid(request):
     user = request.user
-    try:
-        uuid = WatchList.objects.all().filter(pk=user.id)
-    except:
-        return Response(status.HTTP_404_NOT_FOUND)
+    # try:
+    val = {}
+    i = 0
+    for e in user.watchlist_set.all():
+        val[i] = e.uuid
+        i = i + 1
+    # except:
+    #     return Response(status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        serializer = UUIDSerializer(uuid)
-        return Response(serializer.data)
+        return Response(data=val)
 
 
 @api_view(['POST', ])
@@ -45,7 +48,7 @@ def add_uuid(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST', ])
+@api_view(['DELETE', ])
 @permission_classes((IsAuthenticated,))
 def remove_uuid(request):
     user = request.user
