@@ -19,6 +19,9 @@ class NumpyArrayEncoder(JSONEncoder):
 
 class PredictView(views.APIView):
 
+    authentication_classes = []  # disables authentication
+    permission_classes = []  # disables permission
+
     def post(self, request, *args, **kwargs):
 
         try:
@@ -50,6 +53,9 @@ class PredictView(views.APIView):
 
 
 class CurrencyView(generics.RetrieveAPIView):
+
+    authentication_classes = []  # disables authentication
+    permission_classes = []  # disables permission
 
     def get(self, request, pk, *args, **kwargs):
 
