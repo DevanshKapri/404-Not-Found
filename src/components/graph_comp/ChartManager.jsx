@@ -18,7 +18,7 @@ function ChartManager() {
                 <div className="row my-3">
                    <div className="col">
                        <div className="row">
-                           <div className="col-4 ">Coin</div>
+                           <div className="col-4 px-5">Coin</div>
                            <div className="col"><SelectCoin /></div>
                        </div>
                    </div>

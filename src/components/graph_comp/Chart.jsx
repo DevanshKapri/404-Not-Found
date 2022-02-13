@@ -46,8 +46,8 @@ function MyChart() {
       },
       backgroundColor : 'rgb(10,60,210)'
   }
-    if(Fetching || !TimeLabel) {return <Spinner />} return (
-    <div className="App">
+    if(Fetching || !TimeLabel) {return <div className='p-5'><Spinner /></div>} return (
+    <div className="App p-5">
       <Line data={chartData} />
     </div>
   )

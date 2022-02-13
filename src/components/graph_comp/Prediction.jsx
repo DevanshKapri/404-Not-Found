@@ -7,7 +7,7 @@ function Prediction() {
 
 
     return (
-    <div>
+    <div >
       <select className="custom-select custom-select-lg mb-3 " nChange={ e =>{
           PredictionData({days : parseInt(e.target.value) , symbol : Coin.symbol})
       }}>
