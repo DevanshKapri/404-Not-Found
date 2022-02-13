@@ -16,7 +16,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Form, FormikFormProps, Formik, Field, FieldProps } from 'formik';
 import * as yup from 'yup';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) => (
   createStyles({
@@ -102,13 +102,31 @@ const initialValues = {
   email: '',
 };
 
-const handleSubmit = ((values: any) => {
-  console.log(JSON.stringify(values));
-})
 
 const Login = () => {
   const classes = useStyles()
   const navigate = useNavigate()
+  const handleSubmit = ((values: any) => {
+    try {
+      fetch('http://127.0.0.1:8000/dj-rest-auth/login/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      }).then(res => res.json())
+        .then(res => {
+          console.log(res)
+          localStorage.setItem('keymain', res.key)
+          navigate('/dashboard')
+        });
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(JSON.stringify(values));
+  })
+
   return (
     <>
       <Grid className={classes.root}>
@@ -119,7 +137,7 @@ const Login = () => {
           <Box className={classes.btnMain}>
             <Button
               variant='contained'
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/signup')}
               // className={classes.menuBtn}
               sx={{
                 backgroundColor: '#FF0090', '&:hover': {
@@ -214,6 +232,7 @@ const Login = () => {
                       fullWidth
                       variant='contained'
                       // className={classes.submit}
+                      // onClick={setValues(initialValues)}
                       sx={{
                         backgroundColor: '#FF0090', '&:hover': {
                           backgroundColor: '#c60063',

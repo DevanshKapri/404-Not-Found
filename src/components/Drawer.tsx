@@ -12,6 +12,7 @@ import {
   Button,
   Grid,
   Box,
+  Typography,
 } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -38,6 +39,10 @@ const useStyles = makeStyles((theme: Theme) => (
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+    },
+    logo: {
+      fontSize: '30px',
+      color: 'white',
     },
     listItem: {
       display: 'flex',
@@ -102,7 +107,7 @@ const DrawerMain: React.FC<DrawerProps> = ({
           elevation={16}
         >
           <Box className={classes.main}>
-            <List className={classes.list}>
+            {/* <List className={classes.list}>
               <ListItem className={classes.listItem}>
                 <ListItemButton onClick={handleClick} className={classes.listItem}>
                   <ListItemText primary="Shubh" className={classes.listItem} />
@@ -118,7 +123,8 @@ const DrawerMain: React.FC<DrawerProps> = ({
                   <ListItemText primary="Shubh" className={classes.listItem} />
                 </ListItemButton>
               </ListItem>
-            </List>
+            </List> */}
+            <Typography sx={{ fontSize: '30px', marginTop: '20px' }} className={classes.logo}>CryptoPredict</Typography>
             <Box>
               <Box className={classes.button}>
                 <Box className={classes.menuBtn}>

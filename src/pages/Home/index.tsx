@@ -12,14 +12,16 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Drawer from '../../components/Drawer';
 import { useNavigate, Link } from 'react-router-dom';
+import EnhancedTable from '../../components/Table'
 
 
 const useStyles = makeStyles((theme: Theme) => (
   createStyles({
     Navbar: {
-      display: 'flex',
-      justifyContent: 'space-around',
+      // display: 'flex',
+      // justifyContent: 'space-around',
       color: 'white',
+      padding: '20px 40px',
     },
     logo: {
       '&:hover': {
@@ -114,11 +116,11 @@ function Landing() {
   return (
     <>
       <Grid className={classes.root}>
-        <Grid container alignItems="center" className={classes.Navbar}>
+        <Grid container alignItems="center" justifyContent="space-between" className={classes.Navbar}>
           <Link to='/' className={classes.link}>
             CryptoPredict
           </Link>
-          <List className={classes.navLink}>
+          {/* <List className={classes.navLink}>
             <ListItem>
               <ListItemButton>
                 <ListItemText primary="Shubh" />
@@ -134,7 +136,7 @@ function Landing() {
                 <ListItemText primary="Shubh" />
               </ListItemButton>
             </ListItem>
-          </List>
+          </List> */}
           <Box className={classes.button}>
             <Box className={classes.btnMain}>
               <Button
@@ -182,7 +184,7 @@ function Landing() {
             <Typography variant='h4' className={classes.title}>CryptoPredict</Typography>
             <Typography sx={{ margin: '20px' }} className={classes.data}>Get all the details of cryptocurrency, with visual representation at one place</Typography>
             <Button variant='contained'
-              // onClick={() => router.push('/login')}
+              onClick={() => navigate('/signup')}
               // className={classes.menuBtn}
               sx={{
                 backgroundColor: '#FF0090', '&:hover': {
@@ -195,6 +197,7 @@ function Landing() {
           </Box>
         </Box>
       </Grid>
+      {/* <EnhancedTable /> */}
     </>
   );
 }
