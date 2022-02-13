@@ -1,3 +1,4 @@
+from django.http import QueryDict
 from user.models import User, WatchList
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -19,8 +20,8 @@ class UserViewSet(viewsets.ModelViewSet):
 def get_uuid(request):
     user = request.user
     try:
-        uuid = WatchList.objects.filter(user=user)
-    except Watchlist.DoesnotExist:
+        uuid = WatchList.objects.all().filter(pk=user.id)
+    except:
         return Response(status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
@@ -33,7 +34,9 @@ def get_uuid(request):
 def add_uuid(request):
     user = request.user
     if request.method == "POST":
-        serializer = UUIDSerializer(user, data=request.data)
+        dic = QueryDict.copy(request.data)
+        dic["user"] = user.id
+        serializer = UUIDSerializer(data=dic)
         data = {}
         if serializer.is_valid():
             serializer.save()
@@ -47,8 +50,8 @@ def add_uuid(request):
 def remove_uuid(request):
     user = request.user
     try:
-        uuid = WatchList.objects.get(user, data=request.data)
-    except Watchlist.DoesnotExist:
+        uuid = WatchList.objects.get(pk=user.id)
+    except:
         return Response(status.HTTP_404_NOT_FOUND)
 
     if request.method == "DELETE":
