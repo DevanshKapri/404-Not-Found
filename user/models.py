@@ -64,7 +64,7 @@ class WatchList(models.Model):
     uuid = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.user
+        return self.uuid
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
