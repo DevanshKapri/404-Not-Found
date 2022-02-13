@@ -1,6 +1,7 @@
 from rest_framework import views
 from rest_framework.response import Response
-from keras.models import model_from_json
+from rest_framework import generics
+#from keras.models import model_from_json
 
 from predict.api.serializers import PredictionSerializer
 
@@ -25,9 +26,10 @@ class PredictView(views.APIView):
                     'error': '0',
                     'message': 'Successfull',
                     'days': days,
-                    'symbol': symbol
+                    'symbol': symbol,
                     'price': price
                 })
+
             return Response({
                 'error': '1',
                 'message': 'Invalid Parameters'
@@ -40,12 +42,23 @@ class PredictView(views.APIView):
             })
 
 
-class CurrencyView(views.RetrieveAPIView):
+class CurrencyView(generics.RetrieveAPIView):
 
     def get(self, request, pk, *args, **kwargs):
 
         try:
-            days 
+            days = 30
+            symbol = pk
+
+            price = 1123
+
+            return Response({
+                'error': '0',
+                'message': 'Successfull',
+                'days': days,
+                'symbol': symbol,
+                'price': price
+            })
 
         except Exception as e:
             return Response({
