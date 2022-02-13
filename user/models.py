@@ -49,3 +49,11 @@ class ExtendUser(AbstractBaseUser):
 
     def __str__(self):
         return f"{self.username}"
+
+
+class WatchList(models.Model):
+    user=models.ForeignKey(ExtendUser, on_delete=models.CASCADE, null=True)
+    uuid=models.UUIDField(unique=True)
+
+    def __str__(self):
+        return self.user
