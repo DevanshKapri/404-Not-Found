@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4&$@_wi!x1*g7ns^5y9#gz=s!0(tz-epw0^ldy*y-u9qhmgj5u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
+
+    'whitenoise.runserver_nostatic',
 
     'django.contrib.sites',
     'allauth',
@@ -66,9 +68,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
+
+WHITENOISE_USE_FINDERS = True
 
 TEMPLATES = [
     {
@@ -132,5 +137,5 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 
-import django_heroku
-django_heroku.settings(locals())
+
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
