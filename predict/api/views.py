@@ -1,9 +1,20 @@
 from rest_framework import views
 from rest_framework.response import Response
 from rest_framework import generics
+from predict.prediction import predict_results
+import json
+from json import JSONEncoder
+import numpy
 #from keras.models import model_from_json
 
 from predict.api.serializers import PredictionSerializer
+
+
+class NumpyArrayEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, numpy.ndarray):
+            return obj.tolist()
+        return JSONEncoder.default(self, obj)
 
 
 class PredictView(views.APIView):
@@ -20,15 +31,11 @@ class PredictView(views.APIView):
                 if not days:
                     days = 30
 
-                price = 1123
-
-                return Response({
-                    'error': '0',
-                    'message': 'Successfull',
-                    'days': days,
-                    'symbol': symbol,
-                    'price': price
-                })
+                res = predict_results(symbol, days)
+                numpyData = {"array": res}
+                encodedNumpyData = json.dumps(
+                    numpyData, cls=NumpyArrayEncoder)
+                return Response(encodedNumpyData)
 
             return Response({
                 'error': '1',
@@ -50,15 +57,11 @@ class CurrencyView(generics.RetrieveAPIView):
             days = 30
             symbol = pk
 
-            price = 1123
-
-            return Response({
-                'error': '0',
-                'message': 'Successfull',
-                'days': days,
-                'symbol': symbol,
-                'price': price
-            })
+            res = predict_results(symbol, days)
+            numpyData = {"array": res}
+            encodedNumpyData = json.dumps(
+                numpyData, cls=NumpyArrayEncoder)
+            return Response(encodedNumpyData)
 
         except Exception as e:
             return Response({
