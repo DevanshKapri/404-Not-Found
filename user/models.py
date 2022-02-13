@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
+
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password, **kwargs):
@@ -55,18 +56,18 @@ class User(AbstractUser):
         return self.is_admin
 
     def has_module_perms(self, app_label):
-        return True;
+        return True
 
 
 class WatchList(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    uuid=models.UUIDField(unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    uuid = models.CharField(max_length=10)
 
     def __str__(self):
         return self.user
 
 
-@receiver(post_save, sender = settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created = False, **kwargs):
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
