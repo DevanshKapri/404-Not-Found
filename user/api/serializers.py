@@ -1,12 +1,12 @@
-from user.models import ExtendUser,WatchList
+from user.models import User, WatchList
 
 from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ExtendUser
-        fields = ['id', 'username', 'email']
+        model = User
+        fields = ['id', 'email']
 
 
 class UUIDSerializer(serializers.ModelSerializer):
