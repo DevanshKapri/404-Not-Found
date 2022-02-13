@@ -22,6 +22,8 @@ import { createStyles, makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material/styles';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useNavigate } from 'react-router-dom';
+import Notifications from '../../components/Notification';
+import Coin from '../../components/Coin';
 
 const drawerWidth = 240;
 
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 
 const Dashboard = (props: Props) => {
+  const [key, setKey] = React.useState<Number>(1)
   const navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem('keymain')
@@ -64,10 +67,11 @@ const Dashboard = (props: Props) => {
   }
 
   React.useEffect(() => {
-    if (!(localStorage.getItem('keymain'))) {
+    if (localStorage.getItem('keymain') === null || localStorage.getItem('keymain') === 'undefined' || localStorage.getItem('keymain') === undefined || localStorage.getItem('keymain') === 'null') {
       navigate('/login')
     }
-  }, [])
+  })
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -80,17 +84,21 @@ const Dashboard = (props: Props) => {
     <Box className={classes.drawerRoot}>
       <Avatar>S</Avatar>
       <Divider />
-      <Typography sx={{ margin: '5px 0' }}>Username</Typography>
+      {/* <Typography sx={{ margin: '5px 0' }}>Username</Typography> */}
       <Typography>UserEmail</Typography>
       <Divider />
       <List>
         <ListItem
           button
-          selected={true}>
+          selected={key === 1}
+          onClick={() => setKey(1)}
+          sx={{ '&select': { backgroundColor: 'red' } }}>
           <ListItemIcon><FactCheckIcon sx={{ color: 'white' }} /></ListItemIcon>
           <ListItemText primary='Watchlist' />
         </ListItem>
         <ListItem button
+          selected={key === 2}
+          onClick={() => setKey(2)}
         >
           <ListItemIcon><NotificationsActiveIcon sx={{ color: 'white' }} /></ListItemIcon>
           <ListItemText primary='Notifications' />
@@ -186,33 +194,9 @@ const Dashboard = (props: Props) => {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        {
+          key === 2 ? <Notifications /> : <Coin />
+        }
       </Box>
     </Box>
   );

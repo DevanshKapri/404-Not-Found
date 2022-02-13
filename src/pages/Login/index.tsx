@@ -117,7 +117,7 @@ const Login = () => {
         body: JSON.stringify(values)
       }).then(res => res.json())
         .then(res => {
-          console.log(res)
+          console.log("res", res)
           localStorage.setItem('keymain', res.key)
           navigate('/dashboard')
         });
