@@ -31,9 +31,9 @@ def get_uuid(request):
 @api_view(['POST', ])
 @permission_classes((IsAuthenticated),)
 def add_uuid(request):
-    uuid = User(email="ank")
+    user = request.user
     if request.method == "POST":
-        serializer = UUIDSerializer(uuid, data=request.data)
+        serializer = UUIDSerializer(user, data=request.data)
         data = {}
         if serializer.is_valid():
             serializer.save()
@@ -42,12 +42,12 @@ def add_uuid(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['DELETE', ])
+@api_view(['POST', ])
 @permission_classes((IsAuthenticated),)
 def remove_uuid(request):
     user = request.user
     try:
-        uuid = WatchList.objects.get()
+        uuid = WatchList.objects.get(user,data=request.data)
     except Watchlist.DoesnotExist:
         return Response(status.HTTP_404_NOT_FOUND)
 
@@ -57,5 +57,5 @@ def remove_uuid(request):
         if operation:
             data["success"] = "delete sucessful"
         else:
-            data["failure"] = "delelte failure"
+            data["failure"] = "delete failure"
         return Response(data=data)
