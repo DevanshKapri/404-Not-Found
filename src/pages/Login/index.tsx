@@ -33,7 +33,10 @@ const useStyles = makeStyles((theme: Theme) => (
       fontSize: '40px',
       '&:hover': {
         cursor: 'pointer',
-      }
+      },
+      [theme.breakpoints.down('md')]: {
+        fontSize: '30px',
+      },
     },
     btnMain: {
       margin: '25px',
@@ -56,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => (
       flexDirection: 'column',
       alignItems: 'center',
       [theme.breakpoints.down('md')]: {
-        width: '96%',
+        width: '95%',
       },
     },
     textField: {
@@ -108,7 +111,7 @@ const Login = () => {
   const navigate = useNavigate()
   const handleSubmit = ((values: any) => {
     try {
-      fetch('http://127.0.0.1:8000/dj-rest-auth/login/', {
+      fetch('https://crypto404notfound.herokuapp.com/dj-rest-auth/login/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -208,7 +211,7 @@ const Login = () => {
                       </Field>
                     </ListItem>
                     <Grid container padding="8px 16px">
-                      <Grid item xs>
+                      {/* <Grid item xs>
                         <Link to='/'
                           // onClick={() => setOpenPass(true)}
                           // variant='body2'
@@ -216,7 +219,7 @@ const Login = () => {
                         >
                           Forget password?
                         </Link>
-                      </Grid>
+                      </Grid> */}
                       <Grid item>
                         <Link to='/'
                           onClick={() => navigate('/signup')}

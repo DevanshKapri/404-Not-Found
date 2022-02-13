@@ -24,6 +24,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Link, useNavigate } from 'react-router-dom';
 import Notifications from '../../components/Notification';
 import Coin from '../../components/Coin';
+import ChartManager from '../../components/graph_comp/ChartManager';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
 
 const drawerWidth = 240;
 
@@ -85,7 +87,7 @@ const Dashboard = (props: Props) => {
       <Avatar>S</Avatar>
       <Divider />
       {/* <Typography sx={{ margin: '5px 0' }}>Username</Typography> */}
-      <Typography>UserEmail</Typography>
+      {/* <Typography>UserEmail</Typography> */}
       <Divider />
       <List>
         <ListItem
@@ -102,6 +104,13 @@ const Dashboard = (props: Props) => {
         >
           <ListItemIcon><NotificationsActiveIcon sx={{ color: 'white' }} /></ListItemIcon>
           <ListItemText primary='Notifications' />
+        </ListItem>
+        <ListItem button
+          selected={key === 3}
+          onClick={() => setKey(3)}
+        >
+          <ListItemIcon><EqualizerIcon sx={{ color: 'white' }} /></ListItemIcon>
+          <ListItemText primary='Graph' />
         </ListItem>
         <ListItem
           button
@@ -195,7 +204,7 @@ const Dashboard = (props: Props) => {
       >
         <Toolbar />
         {
-          key === 2 ? <Notifications /> : <Coin />
+          key === 2 ? <Notifications /> : key === 1 ? <Coin /> : <ChartManager />
         }
       </Box>
     </Box>

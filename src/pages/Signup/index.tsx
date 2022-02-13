@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme: Theme) => (
       fontSize: '40px',
       '&:hover': {
         cursor: 'pointer',
-      }
+      },
+      [theme.breakpoints.down('md')]: {
+        fontSize: '30px',
+      },
     },
     btnMain: {
       margin: '25px',
@@ -57,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => (
       flexDirection: 'column',
       alignItems: 'center',
       [theme.breakpoints.down('md')]: {
-        width: '96%',
+        width: '95%',
       },
     },
     textField: {
@@ -117,7 +120,7 @@ const Signup = () => {
   const [error, setError] = React.useState('');
   const handleSubmit = (async (values: any) => {
     try {
-      await fetch('http://localhost:8000/dj-rest-auth/registration/', {
+      await fetch('https://crypto404notfound.herokuapp.com/dj-rest-auth/registration/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',

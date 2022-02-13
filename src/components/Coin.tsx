@@ -64,6 +64,16 @@ const Coin = () => {
     },
   };
 
+  const prediction = async (symbol: any) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/predic/${symbol}`);
+      const data = response.data;
+      return data
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const CoinData = async (options: any) => {
     try {
       const resoponse = await axios.get(URL, options);

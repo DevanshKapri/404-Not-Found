@@ -39,11 +39,18 @@ const useStyles = makeStyles((theme: Theme) => (
       background: `url(/bglanding.png)`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
+      [theme.breakpoints.down('md')]: {
+        backgroundImage: 'none',
+        backgroundColor: '#003783'
+      },
     },
     body: {
       width: '100%',
       display: 'flex',
       justifyContent: 'space-around',
+      [theme.breakpoints.down('md')]: {
+        flexDirection: 'column'
+      }
     },
     title: {
       // margin: '20px',
@@ -65,7 +72,10 @@ const useStyles = makeStyles((theme: Theme) => (
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      [theme.breakpoints.down('md')]: {
+        width: '100%',
+      }
     },
     right: {
       width: '40%',
@@ -82,6 +92,9 @@ const useStyles = makeStyles((theme: Theme) => (
       cursor: 'pointer',
       color: 'white',
       fontSize: '40px',
+      [theme.breakpoints.down('md')]: {
+        fontSize: '30px',
+      }
     },
   })
 ))
@@ -176,7 +189,7 @@ function Landing() {
         <Box className={classes.body}>
           <Box className={classes.left}>
             <Typography variant='h4' className={classes.title}>CryptoPredict</Typography>
-            <Typography sx={{ margin: '20px' }} className={classes.data}>Get all the details of cryptocurrency, with visual representation at one place</Typography>
+            <Typography sx={{ margin: '20px', textAlign: 'center' }} className={classes.data}>Get all the details of cryptocurrency, with visual representation at one place</Typography>
             <Button variant='contained'
               onClick={() => navigate('/signup')}
               // className={classes.menuBtn}
